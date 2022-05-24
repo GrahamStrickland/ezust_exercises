@@ -6,10 +6,8 @@
 #include "card.h"
 #include "cardhand.h"
 
-class CardDeck
-{
+class CardDeck {
 public:
-
     CardDeck();
         // Default constructor
 
@@ -20,16 +18,15 @@ public:
 
     QString toString() const;
         // Function to return a QString object representing the deck.
-        // Postcondition: Returned QString.
 
     int getCardsLeft() const;
         // Function to return the number of cards left in the deck.
-        // Postcondition: Returned an int value representing the number
-        //  of cards left in the deck.
+        // Postcondition: Returned m_NumCards;
 
     void restoreDeck();
         // Function to restore the deck to its original size.
-        // Postcondition: Deck contains 52 Card objects.
+        // Postcondition: Deck restored to 52 cards of correct
+        //  number/suite.
 
 private:
     QList<Card*> m_Deck;
