@@ -10,10 +10,10 @@ public:
     CardHand();
         // Default constructor
 
-    void insertCard(const Card& inserted);
+    void insertCard(const Card &inserted);
         // Function to insert a Card object into the CardHand object.
 
-    void removeCard(const Card& removed);
+    void removeCard(const Card &removed);
         // Function to remove a Card object from the CardHand object.
         
     int getValue() const;
@@ -23,10 +23,14 @@ public:
         //  cards have zero value.
         // Postcondition: Returned m_Value.
 
+    int getNumCards() const;
+        // Function to return the number of cards in the CardHand object.
+
     QString toString() const;
         // Function to return a QString representation of the hand.
 private:
     QList<Card*> m_Hand;
     int m_Value;
+    int m_NumCards;
 };
 #endif // CARD_HAND_H

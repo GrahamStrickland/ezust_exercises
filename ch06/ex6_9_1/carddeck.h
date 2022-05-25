@@ -10,6 +10,8 @@ class CardDeck {
 public:
     CardDeck();
         // Default constructor
+        // Postcondition: m_NumCards = 52; m_Deck points to a full
+        //  deck of cards;
 
     CardHand deal(int handSize);
         // Function to pick handSize Card objects from the deck.
