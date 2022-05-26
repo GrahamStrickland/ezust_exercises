@@ -1,6 +1,11 @@
 #ifndef CARD_HAND_H
 #define CARD_HAND_H
 
+// This is the interface of the ADT CardHand which stores a
+// randomly generated QList of Card objects. It is thus an
+// aggregation of the Card ADT. The implemtation is in the file
+// "cardhand.h"
+
 #include <QString>
 #include <QList>
 #include "card.h"
@@ -10,10 +15,10 @@ public:
     CardHand();
         // Default constructor
 
-    void insertCard(const Card &inserted);
+    void insertCard(Card* inserted);
         // Function to insert a Card object into the CardHand object.
 
-    void removeCard(const Card &removed);
+    void removeCard(Card* removed);
         // Function to remove a Card object from the CardHand object.
         
     int getValue() const;
@@ -28,6 +33,10 @@ public:
 
     QString toString() const;
         // Function to return a QString representation of the hand.
+
+    ~CardHand();
+        // Destructor
+
 private:
     QList<Card*> m_Hand;
     int m_Value;

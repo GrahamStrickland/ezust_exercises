@@ -1,12 +1,16 @@
 #ifndef CARD_DECK_H
 #define CARD_DECK_H
 
+// This is the interface of the ADT CardDeck, which simulates a standard
+// deck of 52 cards using a composition of Card objects stored in a
+// QList object. The implementation is in the file "carddeck.cpp"
 #include <QList>
 #include <QString>
 #include "card.h"
 #include "cardhand.h"
 
-class CardDeck {
+class CardDeck : public QList<Card*> 
+{
 public:
     CardDeck();
         // Default constructor
@@ -30,6 +34,8 @@ public:
         // Postcondition: Deck restored to 52 cards of correct
         //  number/suite.
 
+    ~CardDeck();
+        // Destructor
 private:
     QList<Card*> m_Deck;
     int m_NumCards;

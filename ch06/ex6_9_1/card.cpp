@@ -1,10 +1,13 @@
+// This is the implementation of the ADT Card.
+// The interface is in the file "card.h"
+
 #include "card.h"
 
 // Declare static member variables.
-QStringList s_Faces = (QStringList() << "A" << "2" << "3" << "4" << "5" 
+QStringList Card::s_Faces = (QStringList() << "A" << "2" << "3" << "4" << "5" 
         << "6" << "7" << "8" << "9" << "T" << "J" << "Q" << "K");
-QStringList s_Suits = (QStringList() << "Diamonds" << "Clubs" << "Hearts" 
-        << "Spades";
+QStringList Card::s_Suits = (QStringList() << "Diamonds" << "Clubs" << "Hearts" 
+        << "Spades");
 
 Card::Card(int faceNbr, int suitNbr) : m_FaceNbr(faceNbr),
     m_SuitNbr(suitNbr)
@@ -31,6 +34,7 @@ QString Card::getSuit() const
 
 int Card::getValue() const
 {
+    // Assign value depending on face number.
     int value;
 
     switch(m_FaceNbr) {

@@ -1,6 +1,11 @@
 #ifndef CARD_H
 #define CARD_H
 
+// This is the interface of the ADT Card which simulates a real-life
+// playing card in a standard deck of 52 cards. It stores the face 
+// number and suit of a card. The implementation is in the file
+// "card.cpp"
+
 #include <QString>
 #include <QStringList>
 

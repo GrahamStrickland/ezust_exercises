@@ -1,6 +1,12 @@
+// This is a driver program to test the ADT's Card, CardHand, & CardDeck.
+
 #include "carddeck.h"
+#include <QApplication>
 #include <QTextStream>
-#include <QtGui>
+#include <QInputDialog>
+#include <QString>
+#include <QMessageBox>
+
 int main(int argc, char* argv[]) {
     QApplication app(argc, argv);
     QTextStream cout(stdout);
@@ -30,4 +36,6 @@ int main(int argc, char* argv[]) {
         sb = QMessageBox::question(0, QString("QMessageBox::question()"),
                 QString("Another hand?"), QMessageBox::Yes | QMessageBox::No);
     } while (sb == QMessageBox::Yes);
+
+    return EXIT_SUCCESS;
 }
