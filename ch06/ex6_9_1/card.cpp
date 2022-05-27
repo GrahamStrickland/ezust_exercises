@@ -1,6 +1,7 @@
 // This is the implementation of the ADT Card.
 // The interface is in the file "card.h"
 
+#include <QChar>
 #include "card.h"
 
 // Declare static member variables.
@@ -18,13 +19,34 @@ Card::Card(int faceNbr, int suitNbr) : m_FaceNbr(faceNbr),
 QString Card::toString() const
 {
     return QString("%1 of %2")
-                  .arg(s_Faces[m_FaceNbr])
-                  .arg(s_Suits[m_SuitNbr]);
+                  .arg(getFace())
+                  .arg(getSuit());
 }
 
 QString Card::getFace() const
 {
-    return s_Faces[m_FaceNbr];
+    QString face = s_Faces[m_FaceNbr];
+    char faceNum = face.at(0).toLatin1();
+
+    switch(faceNum) {
+    case 'A':
+        face = QString("Ace");
+        break;
+    case 'T':
+        face = QString("10");
+        break;
+    case 'J':
+        face = QString("Jack");
+        break;
+    case 'Q':
+        face = QString("Queen");
+        break;
+    case 'K':
+        face = QString("King");
+        break;
+    }
+
+    return face;
 }
 
 QString Card::getSuit() const

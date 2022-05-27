@@ -3,11 +3,14 @@
 
 #include <cstdlib>
 #include <ctime>
+#include <QTextStream>
 #include "card.h"
 #include "carddeck.h"
 
 const int NUM_SUITS = 4;
 const int NUM_FACES = 13;
+
+QTextStream cout(stdout);
 
 CardDeck::CardDeck() : m_NumCards(0)
 {
@@ -33,12 +36,14 @@ CardHand CardDeck::deal(int handSize)
     // Seed random number generator.
     srandom(time(0));
 
-    while (hand.getNumCards() < handSize) {
-        cardNum = random() % (NUM_SUITS * NUM_FACES);
-        if (m_Deck[cardNum]) {
+    while (m_NumCards > 0 && hand.getNumCards() < handSize) {
+        cardNum = random() % m_NumCards;
+        if (m_Deck[cardNum])
             hand.insertCard(m_Deck.takeAt(cardNum));
-        }
     }
+
+    if (m_NumCards == 0)
+        cout << "No cards left in deck!" << endl;
 
     return hand;
 }
