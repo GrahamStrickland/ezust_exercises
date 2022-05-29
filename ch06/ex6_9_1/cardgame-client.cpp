@@ -1,4 +1,4 @@
-// This is a driver program to test the ADT's Card, CardHand, & CardDeck.
+// This is a driver program to test the ADTs Card, CardHand, & CardDeck.
 
 #include "carddeck.h"
 #include <QApplication>

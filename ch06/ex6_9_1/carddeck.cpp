@@ -38,7 +38,7 @@ CardHand CardDeck::deal(int handSize)
 
     while (m_NumCards > 0 && hand.getNumCards() < handSize) {
         cardNum = random() % m_NumCards;
-        if (m_Deck[cardNum])
+        if (m_Deck.at(cardNum)) 
             hand.insertCard(m_Deck.takeAt(cardNum));
     }
 
@@ -51,14 +51,15 @@ CardHand CardDeck::deal(int handSize)
 QString CardDeck::toString() const
 {
     // Create QString and append all cards.
-    QString deck = QString("");
+    QString deckString = QString("");
 
-    foreach(Card* current, m_Deck) {
-        deck += current->toString();
-        deck += '\n';
+    foreach(Card *current, m_Deck) {
+        deckString += '\n';
+        deckString += current->toString();
     }
+    deckString += '\n';
 
-    return deck;
+    return deckString;
 }
 
 int CardDeck::getCardsLeft() const
