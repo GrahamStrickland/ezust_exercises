@@ -2,7 +2,9 @@
 // The interface is in the file "cardhand.h"
 
 #include <cassert>
+#include <QDebug>
 #include "cardhand.h"
+
 
 CardHand::CardHand() : m_Value(0), m_NumCards(0)
 {
@@ -11,10 +13,12 @@ CardHand::CardHand() : m_Value(0), m_NumCards(0)
 
 void CardHand::insertCard(Card* inserted)
 {
-    // Add pointer to Card object.
-    m_Hand.append(inserted);
+    Card *newCard = inserted;
 
-    m_Value += inserted->getValue();
+    // Add pointer to Card object.
+    m_Hand.append(newCard);
+
+    m_Value += newCard->getValue();
     m_NumCards++;
 }
 
@@ -23,11 +27,13 @@ void CardHand::removeCard(Card* removed)
     // Check that hand is not empty.
     assert(!m_Hand.empty());
 
+    Card *oldCard = removed;
+
     // Remove Card pointer and update number
     // and value.
-    m_Hand.removeAll(removed);
+    m_Hand.removeAll(oldCard);
 
-    m_Value -= removed->getValue();
+    m_Value -= oldCard->getValue();
     m_NumCards--;
 }
 
@@ -46,10 +52,11 @@ QString CardHand::toString() const
     // Generate QString for each Card object stored
     // in hand.
     QString handString = QString("");
+    Card *currentCard;
 
-    foreach(Card *current, m_Hand) {
+    foreach(currentCard, m_Hand) {
         handString += '\n';
-        handString += current->toString();
+        handString += currentCard->toString();
     }
     handString += '\n';
 

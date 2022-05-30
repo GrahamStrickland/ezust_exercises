@@ -31,6 +31,7 @@ CardDeck::CardDeck() : m_NumCards(0)
 CardHand CardDeck::deal(int handSize)
 {
     CardHand hand;
+    Card *newCard;
     int cardNum;
 
     // Seed random number generator.
@@ -38,8 +39,10 @@ CardHand CardDeck::deal(int handSize)
 
     while (m_NumCards > 0 && hand.getNumCards() < handSize) {
         cardNum = random() % m_NumCards;
-        if (m_Deck.at(cardNum)) 
-            hand.insertCard(m_Deck.takeAt(cardNum));
+        if (m_Deck.at(cardNum)) {
+            newCard = m_Deck.takeAt(cardNum);
+            hand.insertCard(newCard);
+        }
     }
 
     if (m_NumCards == 0)
@@ -52,10 +55,11 @@ QString CardDeck::toString() const
 {
     // Create QString and append all cards.
     QString deckString = QString("");
+    Card *currentCard;
 
-    foreach(Card *current, m_Deck) {
+    foreach(currentCard, m_Deck) {
         deckString += '\n';
-        deckString += current->toString();
+        deckString += currentCard->toString();
     }
     deckString += '\n';
 
