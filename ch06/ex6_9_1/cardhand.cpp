@@ -52,9 +52,8 @@ QString CardHand::toString() const
     // Generate QString for each Card object stored
     // in hand.
     QString handString = QString("");
-    Card *currentCard;
 
-    foreach(currentCard, m_Hand) {
+    foreach(const Card *currentCard, m_Hand) {
         handString += '\n';
         handString += currentCard->toString();
     }

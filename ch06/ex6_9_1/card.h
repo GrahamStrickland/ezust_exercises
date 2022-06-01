@@ -11,6 +11,9 @@
 
 class Card {
 public:
+    Card();
+        // Default constructor.
+        
     Card(int faceNbr, int suitNbr);
         // Constructor with arguments. faceNbr corresponds to
         //  0 = "A", 1 = "2", 2 = "3", ... , 10 = "J", 11 = "Q",

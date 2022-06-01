@@ -1,3 +1,4 @@
+
 // This is the implementation of the ADT CardDeck.
 // The interface is in the file "carddeck.h".
 
@@ -55,8 +56,9 @@ QString CardDeck::toString() const
 {
     // Create QString and append all cards.
     QString deckString = QString("");
+    Card *currentCard;
 
-    foreach(const Card *currentCard, m_Deck) {
+    foreach(currentCard, m_Deck) {
         deckString += '\n';
         deckString += currentCard->toString();
     }

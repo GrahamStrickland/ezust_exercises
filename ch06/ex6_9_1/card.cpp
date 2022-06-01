@@ -10,6 +10,11 @@ QStringList Card::s_Faces = (QStringList() << "A" << "2" << "3" << "4" << "5"
 QStringList Card::s_Suits = (QStringList() << "Diamonds" << "Clubs" << "Hearts" 
         << "Spades");
 
+Card::Card() : m_FaceNbr(0), m_SuitNbr(0)
+{
+    // Function body deliberately blank.
+}
+
 Card::Card(int faceNbr, int suitNbr) : m_FaceNbr(faceNbr),
     m_SuitNbr(suitNbr)
 {
