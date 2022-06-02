@@ -2,7 +2,6 @@
 // The interface is in the file "cardhand.h"
 
 #include <cassert>
-#include <QDebug>
 #include "cardhand.h"
 
 
