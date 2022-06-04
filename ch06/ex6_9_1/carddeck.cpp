@@ -32,17 +32,20 @@ CardHand CardDeck::deal(int handSize)
 {
     CardHand hand;
     Card *newCard = 0;
-    int cardNum;
+    int cardFace, cardSuit;
 
     // Seed random number generator.
     srandom(time(0));
 
     while (m_NumCards > 0 && hand.getNumCards() < handSize) {
-        cardNum = random() % m_NumCards;
-        if (m_Deck.at(cardNum)) {
-            newCard = m_Deck.takeAt(cardNum);
-            hand.insertCard(newCard);
+        cardFace = random() % NUM_FACES;
+        cardSuit = random() % NUM_SUITS;
+        if (m_Deck.at(cardFace*cardSuit)) {
+            m_Deck.removeAt(cardFace*cardSuit - NUM_SUITS*NUM_FACES 
+                    + m_NumCards);
             m_NumCards--;
+            newCard = new Card(cardFace, cardSuit);
+            hand.insertCard(newCard);
         }
     }
 
