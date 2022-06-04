@@ -18,9 +18,6 @@ public:
     void insertCard(Card* inserted);
         // Function to insert a Card object into the CardHand object.
 
-    void removeCard(Card* removed);
-        // Function to remove a Card object from the CardHand object.
-        
     int getValue() const;
         // Function to return the card value of the CardHand
         //  object according to the rules of the game of bridge,

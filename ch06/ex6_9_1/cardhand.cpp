@@ -21,21 +21,6 @@ void CardHand::insertCard(Card* inserted)
     m_NumCards++;
 }
 
-void CardHand::removeCard(Card* removed)
-{
-    // Check that hand is not empty.
-    assert(!m_Hand.empty());
-
-    Card *oldCard = removed;
-
-    // Remove Card pointer and update number
-    // and value.
-    m_Hand.removeAll(oldCard);
-
-    m_Value -= oldCard->getValue();
-    m_NumCards--;
-}
-
 int CardHand::getValue() const
 {
     return m_Value;
@@ -50,9 +35,10 @@ QString CardHand::toString() const
 {
     // Generate QString for each Card object stored
     // in hand.
+    Card *currentCard = 0;
     QString handString = QString("");
 
-    foreach(const Card *currentCard, m_Hand) {
+    foreach(currentCard, m_Hand) {
         handString += '\n';
         handString += currentCard->toString();
     }
