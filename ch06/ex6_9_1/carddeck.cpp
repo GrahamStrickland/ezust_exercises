@@ -15,7 +15,7 @@ QTextStream cout(stdout);
 CardDeck::CardDeck() : m_NumCards(0)
 {
     // Generate all cards in standard deck.
-    Card *newCard = 0;
+    Card *newCard;
 
     for (int suitNbr = 0; suitNbr < NUM_SUITS; ++suitNbr) 
     {
@@ -32,19 +32,15 @@ CardHand CardDeck::deal(int handSize)
 {
     CardHand hand;
     Card *newCard = 0;
-    int cardFace, cardSuit;
+    int cardNum;
 
     // Seed random number generator.
     srandom(time(0));
 
     while (m_NumCards > 0 && hand.getNumCards() < handSize) {
-        cardFace = random() % NUM_FACES;
-        cardSuit = random() % NUM_SUITS;
-        if (m_Deck.at(cardFace*cardSuit)) {
-            m_Deck.removeAt(cardFace*cardSuit - NUM_SUITS*NUM_FACES 
-                    + m_NumCards);
-            m_NumCards--;
-            newCard = new Card(cardFace, cardSuit);
+        cardNum = random() % m_NumCards;
+        if (m_Deck.at(cardNum)) {
+            newCard = m_Deck.takeAt(cardNum);
             hand.insertCard(newCard);
         }
     }
@@ -58,10 +54,9 @@ CardHand CardDeck::deal(int handSize)
 QString CardDeck::toString() const
 {
     // Create QString and append all cards.
-    Card *currentCard = 0;
     QString deckString = QString("");
 
-    foreach(currentCard, m_Deck) {
+    foreach(const Card *currentCard, m_Deck) {
         deckString += '\n';
         deckString += currentCard->toString();
     }
@@ -77,7 +72,7 @@ int CardDeck::getCardsLeft() const
 
 void CardDeck::restoreDeck()
 {
-    Card *newCard = 0;
+    Card *newCard;
 
     // Clear deck and add all cards.
     m_Deck.clear();
