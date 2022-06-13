@@ -23,7 +23,16 @@ public:
         //  and production details.
         //Postcondition: Returned QString containing 
         //  film details, with fields separated by sepchar.
+      
+    QString getFilmID() const;
+        //Function to return the ID of the film.
+        //Postcondition: Returned m_FilmID;
 
+
+    QString getTitle() const;
+        //Function to return the title of the film.
+        //Postcondition: Returned m_Title;
+        
 private:
     QString m_FilmID, m_Title, m_Director;
     double m_FilmLength;

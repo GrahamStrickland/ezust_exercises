@@ -20,14 +20,14 @@ public:
         //  object if contained in list; otherwise
         //  error thrown.
 
-    QString getID(Film* film) const;
-        //Function to return the ID of the given
-        //  film object.
+    QString getID(QString title) const;
+        //Function to return the ID of the film
+        //  matching the given title.
         //Postcondition: Returned QString representing
         //  ID of film pointer if contained in list;
-        //  otherwise error thrown.
+        //  otherwise returned empty string.
 
-    void addFilm(Film* film);
+    void addFilm(Film*& film);
         //Function to add a film to the film list.
         //Postcondition: pointer added to list.
 

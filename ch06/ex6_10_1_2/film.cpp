@@ -16,6 +16,16 @@ Film::Film(QStringList& propList)
     //Function body intentionally empty.
 }
 
+QString Film::getFilmID() const
+{
+    return m_FilmID;
+}
+
+QString Film::getTitle() const
+{
+    return m_Title;
+}
+
 Educational::Educational(QString id, QString title, QString dir,
                             double length, QDate relDate, QString subject,
                             int grade) 
