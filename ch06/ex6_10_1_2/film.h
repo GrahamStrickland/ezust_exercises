@@ -64,8 +64,8 @@ private:
 class Entertainment: public Film
 {
 public:
-    enum FilmTypes {NONE=-1, Action, Comedy, SciFi};
-    enum MPAARatings {NONE=-1, G, PG, PG-13};
+    enum FilmTypes {Action, Comedy, SciFi};
+    enum MPAARatings {G, PG, PG13};
 
     Entertainment(QString id, QString title, QString dir, 
             double length, QDate relDate, FilmTypes type,

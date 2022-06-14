@@ -9,7 +9,7 @@ int main()
 {
     FilmList list1;
 
-    *Educational film1 = new Film(QString("012341"), QString("Blue Planet"),
+    *Educational film1 = new Educational(QString("012341"), QString("Blue Planet"),
             QString("Ben Burtt"), 40.0, QDate(1990, 7, 13), QString("Science"), 8);
 
     list1.addFilm(film1);

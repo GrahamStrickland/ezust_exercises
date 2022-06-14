@@ -10,10 +10,10 @@ Film::Film(QString id, QString title, QString dir,
 
 Film::Film(QStringList& propList) 
     : m_FilmID(propList.takeFirst()), m_Title(propList.takeFirst()), 
-    m_Director(propList.takeFirst()), m_FilmLength(propList.takeFirst()), 
-    m_ReleaseDate(propList.takeFirst())
+    m_Director(propList.takeFirst())
 {
-    //Function body intentionally empty.
+    m_FilmLength = propList.takeFirst().toDouble();
+    m_ReleaseDate = QDate::fromString(propList.takeFirst(), Qt::TextDate);
 }
 
 QString Film::getFilmID() const
@@ -29,17 +29,16 @@ QString Film::getTitle() const
 Educational::Educational(QString id, QString title, QString dir,
                             double length, QDate relDate, QString subject,
                             int grade) 
-    : Film(id, title, dir, length, relDate, subject, grade), 
+    : Film(id, title, dir, length, relDate), 
     m_Subject(subject), m_GradeLevel(grade)
 {
     //Function body intentionally empty.
 }
 
 Educational::Educational(QStringList& propList) 
-    : Film(propList), m_Subject(propList.takeFirst()), 
-    m_GradeLevel(propList.takeFirst())
+    : Film(propList), m_Subject(propList.takeFirst()) 
 {
-    //Function body intentionally empty.
+    m_GradeLevel = propList.takeFirst().toInt();
 }
 
 QString Educational::toString(bool labeled, QString sepchar) const
@@ -60,17 +59,17 @@ QString Educational::toString(bool labeled, QString sepchar) const
 Entertainment::Entertainment(QString id, QString title, QString dir,
                             double length, QDate relDate, FilmTypes type,
                             MPAARatings rating) 
-    : Film(id, title, dir, length, relDate, subject, grade), 
+    : Film(id, title, dir, length, relDate), 
     m_Type(type), m_Rating(rating)
 {
     //Function body intentionally empty.
 }
 
 Entertainment::Entertainment(QStringList& propList) 
-    : Film(propList), m_Type(propList.takeFirst()), 
-    m_Rating(propList.takeFirst())
+    : Film(propList)
 {
-    //Function body intentionally empty.
+    m_Type = propList.takeFirst();
+    m_Rating = propList.takeFirst();
 }
 
 QString Entertainment::toString(bool labeled, QString sepchar) const
