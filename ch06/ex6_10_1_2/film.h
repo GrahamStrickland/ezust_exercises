@@ -18,7 +18,7 @@ public:
         //Constructor with list of arguments.
 
     virtual QString toString(bool labeled, 
-            QString sepchar) const = 0;
+            QString sep) const = 0;
         //Function to return the name of the film 
         //  and production details.
         //Postcondition: Returned QString containing 
@@ -33,7 +33,7 @@ public:
         //Function to return the title of the film.
         //Postcondition: Returned m_Title;
         
-private:
+protected:
     QString m_FilmID, m_Title, m_Director;
     double m_FilmLength;
     QDate m_ReleaseDate;
@@ -50,7 +50,7 @@ public:
     Educational(QStringList& propList);
         //Constructor with list of arguments.
 
-    QString toString(bool labeled, QString sepchar) const;
+    QString toString(bool labeled, QString sep) const;
         //Function to return the name of the film 
         //  and production details.
         //Postcondition: Returned QString containing 
@@ -64,8 +64,8 @@ private:
 class Entertainment: public Film
 {
 public:
-    enum FilmTypes {Action, Comedy, SciFi};
-    enum MPAARatings {G, PG, PG13};
+    enum FilmTypes {NoType = -1, Action, Comedy, SciFi};
+    enum MPAARatings {NoRating = -1, G, PG, PG13};
 
     Entertainment(QString id, QString title, QString dir, 
             double length, QDate relDate, FilmTypes type,
@@ -75,7 +75,7 @@ public:
     Entertainment(QStringList& propList);
         //Constructor with list of arguments.
 
-    QString toString(bool labeled, QString sepchar) const;
+    QString toString(bool labeled, QString sep) const;
         //Function to return the name of the film 
         //  and production details.
         //Postcondition: Returned QString containing 

@@ -41,11 +41,10 @@ Educational::Educational(QStringList& propList)
     m_GradeLevel = propList.takeFirst().toInt();
 }
 
-QString Educational::toString(bool labeled, QString sepchar) const
+QString Educational::toString(bool labeled, QString sep) const
 {
     if (labeled)
-        return QString("Film ID: %1%2 Title: %3%4 Director: %5%6 Length: %7%8
-                Release Date: %9%10 Subject: %11%12 Grade Level: %13")
+        return QString("Film ID: %1%2 Title: %3%4 Director: %5%6 Length: %7%8Release Date: %9%10 Subject: %11%12 Grade Level: %13")
             .arg(m_FilmID).arg(sep).arg(m_Title).arg(sep).arg(m_Director)
             .arg(sep).arg(m_FilmLength).arg(sep).arg(m_ReleaseDate.toString())
             .arg(sep).arg(m_Subject).arg(sep).arg(m_GradeLevel);
@@ -68,15 +67,31 @@ Entertainment::Entertainment(QString id, QString title, QString dir,
 Entertainment::Entertainment(QStringList& propList) 
     : Film(propList)
 {
-    m_Type = propList.takeFirst();
-    m_Rating = propList.takeFirst();
+    QString type = propList.takeFirst(), rating = propList.takeFirst();
+
+    if (type.compare("Action", Qt::CaseInsensitive))
+        m_Type = Action;
+    else if (type.compare("Comedy", Qt::CaseInsensitive))
+        m_Type = Comedy;
+    else if (type.compare("SciFi", Qt::CaseInsensitive))
+        m_Type = SciFi;
+    else
+        m_Type = NoType;
+
+    if (rating.compare("G", Qt::CaseInsensitive))
+        m_Rating = G;
+    else if (rating.compare("PG", Qt::CaseInsensitive))
+        m_Rating = PG;
+    else if (rating.compare("PG-13", Qt::CaseInsensitive))
+        m_Rating = PG13;
+    else
+        m_Rating = NoRating;
 }
 
-QString Entertainment::toString(bool labeled, QString sepchar) const
+QString Entertainment::toString(bool labeled, QString sep) const
 {
     if (labeled)
-        return QString("Film ID: %1%2 Title: %3%4 Director: %5%6 Length: %7%8
-                Release Date: %9%10 Type: %11%12 MPAA Rating: %13")
+        return QString("Film ID: %1%2 Title: %3%4 Director: %5%6 Length: %7%8Release Date: %9%10 Type: %11%12 MPAA Rating: %13")
             .arg(m_FilmID).arg(sep).arg(m_Title).arg(sep).arg(m_Director)
             .arg(sep).arg(m_FilmLength).arg(sep).arg(m_ReleaseDate.toString())
             .arg(sep).arg(m_Type).arg(sep).arg(m_Rating);
