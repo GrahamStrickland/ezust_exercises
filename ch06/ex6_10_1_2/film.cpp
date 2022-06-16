@@ -1,43 +1,22 @@
 #include "film.h"
 
-Film::Film(QString id, QString title, QString dir,
-            double length, QDate relDate) 
-    : m_FilmID(id), m_Title(title), m_Director(dir), 
-    m_FilmLength(length), m_ReleaseDate(relDate)
-{
-    //Function body intentionally empty.
-}
-
-Film::Film(QStringList& propList) 
-    : m_FilmID(propList.takeFirst()), m_Title(propList.takeFirst()), 
-    m_Director(propList.takeFirst())
-{
-    m_FilmLength = propList.takeFirst().toDouble();
-    m_ReleaseDate = QDate::fromString(propList.takeFirst(), Qt::TextDate);
-}
-
-QString Film::getFilmID() const
-{
-    return m_FilmID;
-}
-
-QString Film::getTitle() const
-{
-    return m_Title;
-}
-
 Educational::Educational(QString id, QString title, QString dir,
                             double length, QDate relDate, QString subject,
                             int grade) 
-    : Film(id, title, dir, length, relDate), 
+    : m_FilmID(id), m_Title(title), m_Director(dir), 
+    m_FilmLength(length), m_ReleaseDate(relDate),
     m_Subject(subject), m_GradeLevel(grade)
 {
     //Function body intentionally empty.
 }
 
 Educational::Educational(QStringList& propList) 
-    : Film(propList), m_Subject(propList.takeFirst()) 
+    : m_FilmID(propList.takeFirst()), m_Title(propList.takeFirst()), 
+    m_Director(propList.takeFirst()) 
 {
+    m_FilmLength = propList.takeFirst().toDouble();
+    m_ReleaseDate = QDate::fromString(propList.takeFirst(), Qt::TextDate);
+    m_Subject = propList.takeFirst();
     m_GradeLevel = propList.takeFirst().toInt();
 }
 
@@ -55,18 +34,32 @@ QString Educational::toString(bool labeled, QString sep) const
             .arg(sep).arg(m_Subject).arg(sep).arg(m_GradeLevel);
 }
 
+QString Educational::getFilmID() const
+{
+    return m_FilmID;
+}
+
+QString Educational::getTitle() const
+{
+    return m_Title;
+}
+
 Entertainment::Entertainment(QString id, QString title, QString dir,
                             double length, QDate relDate, FilmTypes type,
                             MPAARatings rating) 
-    : Film(id, title, dir, length, relDate), 
+    : m_FilmID(id), m_Title(title), m_Director(dir), 
+    m_FilmLength(length), m_ReleaseDate(relDate),
     m_Type(type), m_Rating(rating)
 {
     //Function body intentionally empty.
 }
 
 Entertainment::Entertainment(QStringList& propList) 
-    : Film(propList)
+    : m_FilmID(propList.takeFirst()), m_Title(propList.takeFirst()), 
+    m_Director(propList.takeFirst()) 
 {
+    m_FilmLength = propList.takeFirst().toDouble();
+    m_ReleaseDate = QDate::fromString(propList.takeFirst(), Qt::TextDate);
     QString type = propList.takeFirst(), rating = propList.takeFirst();
 
     if (type.compare("Action", Qt::CaseInsensitive))
@@ -101,3 +94,14 @@ QString Entertainment::toString(bool labeled, QString sep) const
             .arg(sep).arg(m_FilmLength).arg(sep).arg(m_ReleaseDate.toString())
             .arg(sep).arg(m_Type).arg(sep).arg(m_Rating);
 }
+
+QString Entertainment::getFilmID() const
+{
+    return m_FilmID;
+}
+
+QString Entertainment::getTitle() const
+{
+    return m_Title;
+}
+

@@ -10,13 +10,6 @@ using namespace std;
 class Film
 {
 public:
-    Film(QString id, QString title, QString dir, 
-            double length, QDate relDate);
-        //Constructor with arguments.
-
-    Film(QStringList& propList);
-        //Constructor with list of arguments.
-
     virtual QString toString(bool labeled, 
             QString sep) const = 0;
         //Function to return the name of the film 
@@ -24,19 +17,15 @@ public:
         //Postcondition: Returned QString containing 
         //  film details, with fields separated by sepchar.
       
-    QString getFilmID() const;
+    virtual QString getFilmID() const = 0;
         //Function to return the ID of the film.
         //Postcondition: Returned m_FilmID;
 
-
-    QString getTitle() const;
+    virtual QString getTitle() const = 0;
         //Function to return the title of the film.
         //Postcondition: Returned m_Title;
-        
-protected:
-    QString m_FilmID, m_Title, m_Director;
-    double m_FilmLength;
-    QDate m_ReleaseDate;
+
+    virtual ~Film() {}
 };
 
 class Educational: public Film
@@ -56,7 +45,18 @@ public:
         //Postcondition: Returned QString containing 
         //  film details, with fields separated by sepchar.
 
-private:
+    QString getFilmID() const;
+        //Function to return the ID of the film.
+        //Postcondition: Returned m_FilmID;
+
+    QString getTitle() const;
+        //Function to return the title of the film.
+        //Postcondition: Returned m_Title;
+
+protected:
+    QString m_FilmID, m_Title, m_Director;
+    double m_FilmLength;
+    QDate m_ReleaseDate;
     QString m_Subject;
     int m_GradeLevel;
 };
@@ -81,7 +81,18 @@ public:
         //Postcondition: Returned QString containing 
         //  film details, with fields separated by sepchar.
 
+    QString getFilmID() const;
+        //Function to return the ID of the film.
+        //Postcondition: Returned m_FilmID;
+
+    QString getTitle() const;
+        //Function to return the title of the film.
+        //Postcondition: Returned m_Title;
+
 private:
+    QString m_FilmID, m_Title, m_Director;
+    double m_FilmLength;
+    QDate m_ReleaseDate;
     FilmTypes m_Type;
     MPAARatings m_Rating;
 };

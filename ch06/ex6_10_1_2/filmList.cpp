@@ -9,7 +9,7 @@ QString FilmList::toString() const
     QStringList list;
 
     for (int i = 0; i < size(); ++i)
-        list << at(i)->toString(true, '\n');
+        list << at(i)->toString(true, QString("\n"));
 
     return list.join('\n');
 }
@@ -44,7 +44,7 @@ void FilmList::addFilm(Film*& film)
         append(film);
     else {
         qDebug() << id << "Already in film list:\n"
-                 << oldFilm->toString()
+                 << oldFilm->toString(true, QString("\n"))
                  << "\nDeleting new pointer.";
         delete film;
         film = 0;
