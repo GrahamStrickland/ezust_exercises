@@ -27,7 +27,7 @@ public:
         //  ID of film pointer if contained in list;
         //  otherwise returned empty string.
 
-    void addFilm(Film*& film);
+    void addFilm(Film* film);
         //Function to add a film to the film list.
         //Postcondition: pointer added to list.
 

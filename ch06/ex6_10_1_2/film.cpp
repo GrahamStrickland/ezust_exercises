@@ -23,7 +23,7 @@ Educational::Educational(QStringList& propList)
 QString Educational::toString(bool labeled, QString sep) const
 {
     if (labeled)
-        return QString("Film ID: %1%2 Title: %3%4 Director: %5%6 Length: %7%8Release Date: %9%10 Subject: %11%12 Grade Level: %13")
+        return QString("Film ID: %1%2Title: %3%4Director: %5%6Length: %7%8Release Date: %9%10Subject: %11%12Grade Level: %13")
             .arg(m_FilmID).arg(sep).arg(m_Title).arg(sep).arg(m_Director)
             .arg(sep).arg(m_FilmLength).arg(sep).arg(m_ReleaseDate.toString())
             .arg(sep).arg(m_Subject).arg(sep).arg(m_GradeLevel);
@@ -84,7 +84,7 @@ Entertainment::Entertainment(QStringList& propList)
 QString Entertainment::toString(bool labeled, QString sep) const
 {
     if (labeled)
-        return QString("Film ID: %1%2 Title: %3%4 Director: %5%6 Length: %7%8Release Date: %9%10 Type: %11%12 MPAA Rating: %13")
+        return QString("Film ID: %1%2Title: %3%4Director: %5%6Length: %7%8Release Date: %9%10Type: %11%12MPAA Rating: %13")
             .arg(m_FilmID).arg(sep).arg(m_Title).arg(sep).arg(m_Director)
             .arg(sep).arg(m_FilmLength).arg(sep).arg(m_ReleaseDate.toString())
             .arg(sep).arg(m_Type).arg(sep).arg(m_Rating);

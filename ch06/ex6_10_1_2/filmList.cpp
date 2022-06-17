@@ -11,7 +11,7 @@ QString FilmList::toString() const
     for (int i = 0; i < size(); ++i)
         list << at(i)->toString(true, QString("\n"));
 
-    return list.join('\n');
+    return list.join(QString("\n\n"));
 }
 
 Film* FilmList::findFilm(QString id) const
@@ -34,7 +34,7 @@ QString FilmList::getID(QString title) const
     return QString("");
 }
 
-void FilmList::addFilm(Film*& film)
+void FilmList::addFilm(Film* film)
 {
     QString id(film->getFilmID());
 
