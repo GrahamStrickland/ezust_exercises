@@ -83,16 +83,81 @@ Entertainment::Entertainment(QStringList& propList)
 
 QString Entertainment::toString(bool labeled, QString sep) const
 {
-    if (labeled)
-        return QString("Film ID: %1%2Title: %3%4Director: %5%6Length: %7%8Release Date: %9%10Type: %11%12MPAA Rating: %13")
+    QString string;
+
+    if (labeled) {
+        string = QString("Film ID: %1%2Title: %3%4Director: %5%6Length: %7%8Release Date: %9")
             .arg(m_FilmID).arg(sep).arg(m_Title).arg(sep).arg(m_Director)
-            .arg(sep).arg(m_FilmLength).arg(sep).arg(m_ReleaseDate.toString())
-            .arg(sep).arg(m_Type).arg(sep).arg(m_Rating);
-    else
-        return QString("%1%2%3%4%5%6%7%8%9%10%11%12%13")
+            .arg(sep).arg(m_FilmLength).arg(sep).arg(m_ReleaseDate.toString());
+        string += "\nType: ";
+        switch (m_Type) {
+        case 0:
+            string += "Action";
+            break;
+        case 1:
+            string += "Comedy";
+            break;
+        case 2:
+            string += "Sci-Fi";
+            break;
+        default:
+            string += "None";
+            break;
+        }
+        string += "\nRating: ";
+        switch (m_Rating) {
+        case 0:
+            string += "G";
+            break;
+        case 1:
+            string += "PG";
+            break;
+        case 2:
+            string += "PG-13";
+            break;
+        default:
+            string += "None";
+            break;
+        }
+        string += '\n';
+    } else {
+        string = QString("%1%2%3%4%5%6%7%8%9")
             .arg(m_FilmID).arg(sep).arg(m_Title).arg(sep).arg(m_Director)
-            .arg(sep).arg(m_FilmLength).arg(sep).arg(m_ReleaseDate.toString())
-            .arg(sep).arg(m_Type).arg(sep).arg(m_Rating);
+            .arg(sep).arg(m_FilmLength).arg(sep).arg(m_ReleaseDate.toString());
+        string += '\n';
+        switch (m_Type) {
+        case 0:
+            string += "Action";
+            break;
+        case 1:
+            string += "Comedy";
+            break;
+        case 2:
+            string += "Sci-Fi";
+            break;
+        default:
+            string += "None";
+            break;
+        }
+        string += '\n';
+        switch (m_Rating) {
+        case 0:
+            string += "G";
+            break;
+        case 1:
+            string += "PG";
+            break;
+        case 2:
+            string += "PG-13";
+            break;
+        default:
+            string += "None";
+            break;
+        }
+        string += '\n';
+    }
+
+    return string;
 }
 
 QString Entertainment::getFilmID() const
@@ -104,4 +169,3 @@ QString Entertainment::getTitle() const
 {
     return m_Title;
 }
-
