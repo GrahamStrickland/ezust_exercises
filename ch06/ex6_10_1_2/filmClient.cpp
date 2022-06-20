@@ -38,7 +38,9 @@ int main()
          << list.toString() << endl;
 
     // Test deleting and adding element already in list.
-    list.removeFilm(QString("012341"));
+    propList << "051234" << "12 Monkeys" << "Terry Gilliam" << "129.0" << "Fri Dec 29 1995"
+             << "SciFi" << "PG-13";
+    list.removeFilm(QString("051234"));
     Entertainment *film5 = new Entertainment(propList);
     list.addFilm(film5);
     

@@ -119,7 +119,6 @@ QString Entertainment::toString(bool labeled, QString sep) const
             string += "None";
             break;
         }
-        string += '\n';
     } else {
         string = QString("%1%2%3%4%5%6%7%8%9")
             .arg(m_FilmID).arg(sep).arg(m_Title).arg(sep).arg(m_Director)
@@ -154,7 +153,6 @@ QString Entertainment::toString(bool labeled, QString sep) const
             string += "None";
             break;
         }
-        string += '\n';
     }
 
     return string;
