@@ -5,6 +5,19 @@
 #include <QList>
 #include <QStringList>
 
+class Library : public QList<RefItem*> {
+public:
+    Library() {}
+    ~Library();
+    void addRefItem(RRefItem*& refItem);
+    int removeRefItem(QString isbn);
+    QString toString(QString isbn);
+private:
+    Library(const Library&);
+    Library& operator=(const Library&);
+    RefItem* findRefItem(QString isbn);
+};
+
 class RefItem {
 public:
     virtual ~refItem();
@@ -38,7 +51,7 @@ private:
 
 class ReferenceBook : public Book {
 public:
-    enum RefCategory {NONE = -1, Art, Architecture, ComputerScience, Literature,
+    enum RefCategory {NOREF = -1, Art, Architecture, ComputerScience, Literature,
                         Math, Music, Science};
     ReferenceBook(QString type, QString isbn, QString title, QString author,
             QString pub, int year, RefCategory refcat, int numCopies=1);
@@ -51,17 +64,58 @@ private:
     RefCategory m_Category;
 };
 
-class Library : public QList<RefItem*> {
+class TextBook : public Book {
 public:
-    Library() {}
-    ~Library();
-    void addRefItem(RRefItem*& refItem);
-    int removeRefItem(QString isbn);
-    QString toString(QString isbn);
+    enum TextCategory {NOTEXT = -1, Biology, Chemistry, Law, Mathematics,
+                            Philosophy, Psychology, Physics};
+    TextBook(QString type, QString isbn, QString title, QString author,
+            QString pub, int year, RefCategory refcat, int numCopies=1);
+    TextBook(QString& proplist);
+    QString toString(QString sep="[::]") const;
+    TextCategory getCategory() const;
+    QString categoryString() const; //returns string version of m_Category
+    static QStringList getTextCategories();  //returns a list of categories
 private:
-    Library(const Library&);
-    Library& operator=(const Library&);
-    RefItem* findRefItem(QString isbn);
+    TextCategory m_Category;
 };
 
+class Dvd : public RefItem {
+public:
+    Dvd(QString type, int year, int numCopies=1);
+    Dvd(QStringList& proplist);
+    virtual QString toString(QString sep="[::]") const;
+    int getCopyRightYear() const;
+    QString getCreator() const;
+    QString getPublisher() const;
+    int getCopyRightYear() const;
+private:
+    QString m_Creator, m_Publisher;
+    int m_CopyrightYear;
+};
+
+class Film : public Dvd {
+public:
+    enum FilmCategory {NoFilm = -1, Action, Comedy, Romance, Thriller};
+    Film(QString type, int year, int numCopies=1);
+    Film(QStringList& proplist);
+    QString toString(QString sep="[::]") const;
+    FilmCategory getCategory() const;
+    QString categoryString() const;
+    static QStringList getFilmCategories();
+private:
+    FilmCategory m_Category;
+};
+
+class DataBase : public Dvd {
+public:
+    enum DBCategory {NoDB = -1, RefBook, TextBook, Film};
+    DataBase(QString type, int year, int numCopies=1);
+    DataBase(QStringList& proplist);
+    QString toString(QString sep="[::]") const;
+    DBCategory getCategory() const;
+    QStrign categoryString() const;
+    static QStringList getDBCategories();
+private:
+    DBCategory m_Category;
+};
 #endif //LIBRARY_H

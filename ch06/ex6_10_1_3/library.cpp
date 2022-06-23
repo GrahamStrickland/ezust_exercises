@@ -1,48 +1,5 @@
 #include "library.h"
 
-RefItem::RefItem(QStringList& plst) : m_ItemType(plst.takeFirst()),
-    m_ISBN(plst.takeFirst()), m_Title(plst.takeFirst),
-    m_NumberOfCopies(plst.takeFirst().toInt())
-{}
-
-QString RefItem::toString(QString sep) const {
-    return
-        QString("%1%2%3%4%5%6%7").arg(m_ItemType).arg(sep).arg(m_ISBN).arg(sep)
-                                .arg(m_Title).arg(sep).arg(m_NumberOfCopies);
-}
-
-Book::Book(QStringList& plst) : RefItem(plst), m_Author(plst.takeFirst()),
-    m_Publisher(plst.takeFirst()), m_CopyrightYear(plst.takeFirst().toInt())
-{}
-
-QString Book::toString(QString sep) const {
-    return QString("%1%2%3%4%5%6%7").arg(RefItem::toString(sep)).arg(sep)
-                .arg(m_Author).arg(sep).arg(m_Publisher).arg(sep)
-                .arg(m_CopyrightYear);
-}
-
-ReferenceBook::ReferenceBook(QStringList& plst) : Book(plst),
-    m_Category(static_cast<RefCategory>(plst.takeFirst().toInt()))
-{}
-
-QString ReferenceBook::toString(QString sep) const {
-    return QString("%1%2%3").arg(Book::toString(sep)).arg(sep)
-                            .arg(categoryString());
-}
-
-QString ReferenceBook::categoryString() const {
-    switch(m_Category) {
-        case Art: return "Art";
-        case Architectur: return "Architecture";
-        case ComputerScience: return "ComputerScience";
-        case Literature: return "Literature";
-        case Math: return "Math";
-        case Music: return "Music";
-        case Science: return "Science";
-        default: return "None";
-    }
-}
-
 Library::~Library() {
     qDeleteAll(*this);
     clear();
@@ -111,4 +68,47 @@ QString Library::getItemString(QString isbn) {
         return ref->toString();
     else
         return QString();
+}
+
+RefItem::RefItem(QStringList& plst) : m_ItemType(plst.takeFirst()),
+    m_ISBN(plst.takeFirst()), m_Title(plst.takeFirst),
+    m_NumberOfCopies(plst.takeFirst().toInt())
+{}
+
+QString RefItem::toString(QString sep) const {
+    return
+        QString("%1%2%3%4%5%6%7").arg(m_ItemType).arg(sep).arg(m_ISBN).arg(sep)
+                                .arg(m_Title).arg(sep).arg(m_NumberOfCopies);
+}
+
+Book::Book(QStringList& plst) : RefItem(plst), m_Author(plst.takeFirst()),
+    m_Publisher(plst.takeFirst()), m_CopyrightYear(plst.takeFirst().toInt())
+{}
+
+QString Book::toString(QString sep) const {
+    return QString("%1%2%3%4%5%6%7").arg(RefItem::toString(sep)).arg(sep)
+                .arg(m_Author).arg(sep).arg(m_Publisher).arg(sep)
+                .arg(m_CopyrightYear);
+}
+
+ReferenceBook::ReferenceBook(QStringList& plst) : Book(plst),
+    m_Category(static_cast<RefCategory>(plst.takeFirst().toInt()))
+{}
+
+QString ReferenceBook::toString(QString sep) const {
+    return QString("%1%2%3").arg(Book::toString(sep)).arg(sep)
+                            .arg(categoryString());
+}
+
+QString ReferenceBook::categoryString() const {
+    switch(m_Category) {
+        case Art: return "Art";
+        case Architectur: return "Architecture";
+        case ComputerScience: return "ComputerScience";
+        case Literature: return "Literature";
+        case Math: return "Math";
+        case Music: return "Music";
+        case Science: return "Science";
+        default: return "None";
+    }
 }
