@@ -11,7 +11,9 @@ public:
     ~Library();
     void addRefItem(RRefItem*& refItem);
     int removeRefItem(QString isbn);
-    QString toString(QString isbn);
+    bool isInList(QString isbn);
+    QString toString(QString sep) const;
+    QString getItemString(QString isbn);
 private:
     Library(const Library&);
     Library& operator=(const Library&);
@@ -40,7 +42,7 @@ public:
     Book(QString type, QString isbn, QString title, QString author,
             QString pub, int year, int numCopies=1);
     Book(QStringList& proplist);
-    virtual QString toString(QString sep="[::]") const;
+    QString toString(QString sep="[::]") const;
     QString getAuthor() const;
     QString getPublisher() const;
     int getCopyRightYear() const;
@@ -69,7 +71,7 @@ public:
     enum TextCategory {NOTEXT = -1, Biology, Chemistry, Law, Mathematics,
                             Philosophy, Psychology, Physics};
     TextBook(QString type, QString isbn, QString title, QString author,
-            QString pub, int year, RefCategory refcat, int numCopies=1);
+            QString pub, int year, TextCategory textcat, int numCopies=1);
     TextBook(QString& proplist);
     QString toString(QString sep="[::]") const;
     TextCategory getCategory() const;
