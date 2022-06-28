@@ -83,13 +83,13 @@ private:
 
 class Dvd : public RefItem {
 public:
-    Dvd(QString type, int year, int numCopies=1);
+    Dvd(QString type, QString isbn, QString title, 
+        QString creator, QString pub, int year, int numCopies=1);
     Dvd(QStringList& proplist);
     virtual QString toString(QString sep="[::]") const;
-    int getCopyRightYear() const;
+    int getCopyrightYear() const;
     QString getCreator() const;
     QString getPublisher() const;
-    int getCopyRightYear() const;
 private:
     QString m_Creator, m_Publisher;
     int m_CopyrightYear;
@@ -98,7 +98,9 @@ private:
 class Film : public Dvd {
 public:
     enum FilmCategory {NoFilm = -1, Action, Comedy, Romance, Thriller};
-    Film(QString type, int year, int numCopies=1);
+    Film(QString type, QString isbn, QString title, 
+        QString creator, QString pub, int year, int numCopies=1,
+        FilmCategory filmcat);
     Film(QStringList& proplist);
     QString toString(QString sep="[::]") const;
     FilmCategory getCategory() const;
@@ -111,11 +113,13 @@ private:
 class DataBase : public Dvd {
 public:
     enum DBCategory {NoDB = -1, RefBook, TextBook, Film};
-    DataBase(QString type, int year, int numCopies=1);
+    DataBase(QString type, QString isbn, QString title,
+        QString creator, QString pub, int year, int numCopies=1,
+        DBCategory dbcat);
     DataBase(QStringList& proplist);
     QString toString(QString sep="[::]") const;
     DBCategory getCategory() const;
-    QStrign categoryString() const;
+    QString categoryString() const;
     static QStringList getDBCategories();
 private:
     DBCategory m_Category;

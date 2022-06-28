@@ -153,14 +153,14 @@ RefCategory ReferenceBook::getCategory() const {
 
 QString ReferenceBook::categoryString() const {
     switch(m_Category) {
-        case Art: return "Art";
-        case Architectur: return "Architecture";
-        case ComputerScience: return "ComputerScience";
-        case Literature: return "Literature";
-        case Math: return "Math";
-        case Music: return "Music";
-        case Science: return "Science";
-        default: return "None";
+    case Art: return "Art";
+    case Architectur: return "Architecture";
+    case ComputerScience: return "ComputerScience";
+    case Literature: return "Literature";
+    case Math: return "Math";
+    case Music: return "Music";
+    case Science: return "Science";
+    default: return "None";
     }
 }
 
@@ -194,23 +194,120 @@ TextCategory TextBook::getCategory() const {
 
 QString TextBook::categoryString() const {
     switch(m_Category) {
-        case Biology: return "Biology";
-        case Chemistry: return "Chemistry";
-        case Law: return "Law";
-        case Mathematics: return "Mathematics";
-        case Philosophy: return "Philosophy";
-        case Psychology: return "Psychology";
-        case Physics: return "Physics";
-        default: return "None";
+    case Biology: return "Biology";
+    case Chemistry: return "Chemistry";
+    case Law: return "Law";
+    case Mathematics: return "Mathematics";
+    case Philosophy: return "Philosophy";
+    case Psychology: return "Psychology";
+    case Physics: return "Physics";
+    default: return "None";
     }
 }
 
-QStringList TextBook::getTextCategories()
-{
+QStringList TextBook::getTextCategories() {
     QStringList list;
     
     list << "Biology" << "Chemistry" << "Law" << "Mathematics" << "Philosophy"
          << "Psychology" << "Physics";
     
+    return list;
+}
+
+Dvd::Dvd(QString type, QString isbn, QString title, QString creator, 
+        QString pub, int year, int numCopies) : RefItem(type, isbn, title, numCopies),
+    m_Creator(creator), m_Publisher(pub), m_CopyrightYear(year)
+{}
+
+Dvd::Dvd(QStringList& proplist) : RefItem(proplist), m_Creator(proplist.takeFirst()),
+    m_Publisher(proplist.takeFirst()), m_CopyrightYear(proplist.takeFirst().toInt())
+{}
+
+QString Dvd::toString(QString sep) const {
+    return QString("%1%2%3%4%5%6%7").arg(RefItem::toString(sep)).arg(sep)
+                .arg(m_Creator).arg(sep).arg(m_Publisher).arg(sep)
+                .arg(m_CopyrightYear);
+}
+
+int Dvd::getCopyrightYear() const {
+    return m_CopyrightYear;
+}
+
+QString Dvd::getCreator() const {
+    return m_Creator;
+}
+
+QString Dvd::getPublisher() const {
+    return m_Publisher;
+}
+
+Film::Film(Qstring type, QString isbn, QString title, QString creator, QString pub,
+        int year, int numCopies, FilmCategory filmcat) : 
+    Dvd(type, isbn, title, creator, pub, year, numCopies), m_Category(filmcat)
+{}
+
+Film::Film(QStringList& proplist) : Dvd(proplist),
+    m_Category(static_cast<FilmCategory>(plst.takeFirst().toInt()))
+{}
+
+QString Film::toString(QString sep) const {
+    return QString("%1%2%3").arg(Dvd::toString(sep)).arg(sep)
+                            .arg(categoryString());
+}
+
+FilmCategory Film::getCategory() const {
+    return m_Category;
+}
+
+QString Film::categoryString() const {
+    switch(m_Category) {
+    case Action: return "Action";
+    case Comedy: return "Comedy";
+    case Romance: return "Romance";
+    case Thriller: return "Thriller";
+    default: return "None";
+    }
+}
+
+QStringList Film::getFilmCategories() {
+    QStringList list;
+
+    list << "Action" << "Comedy" << "Romance" << "Thriller";
+
+    return list;
+}
+
+DataBase(QString type, QString isbnm QString title, QString creator, QString pub,
+        int year, int numCopies, DBCategory dbcat) :
+    Dvd(type, isbn, title, creator, pub, year, numCopies), m_Category(dbcat)
+{}
+
+DataBase(QStringList& proplist) : Dvd(proplist),
+    m_Category(static_cast<DBCategory>(plst.takeFirst().toInt()))
+{}
+
+QString DataBase::toString(QString sep) {
+    return QString("%1%2%3").arg(Dvd::toString(sep)).arg(sep)
+                            .arg(categoryString());
+}
+
+DBCategory DataBase::getCategory() const {
+    return m_Category;
+}
+
+QString DataBase::categoryString() const {
+    switch(m_Category) {
+    case RefBook: return "Reference Book";
+    case TextBook: return "Textbook";
+    case Film: return "Film";
+    default: return "None";
+    }
+}
+
+QStringList DataBase::getDBCategories() {
+    QStringList list;
+
+    list << "Reference Book" << "Textbook" << "Film";
+
     return list;
 }
