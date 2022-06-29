@@ -786,7 +786,8 @@ compiler_clean: compiler_moc_predefs_clean
 		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qfiledevice.h \
 		/Users/grahamstrickland/opt/anaconda3/include/qt/QtGui/qvector2d.h \
 		/Users/grahamstrickland/opt/anaconda3/include/qt/QtGui/qtouchdevice.h \
-		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/QStringList
+		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/QStringList \
+		refitem.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o .obj/library.o library.cpp
 
 .obj/libraryClient.o: libraryClient.cpp libraryui.h \
@@ -870,7 +871,8 @@ compiler_clean: compiler_moc_predefs_clean
 		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qfiledevice.h \
 		/Users/grahamstrickland/opt/anaconda3/include/qt/QtGui/qvector2d.h \
 		/Users/grahamstrickland/opt/anaconda3/include/qt/QtGui/qtouchdevice.h \
-		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/QStringList
+		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/QStringList \
+		refitem.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o .obj/libraryClient.o libraryClient.cpp
 
 .obj/libraryui.o: libraryui.cpp /Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/QTextStream \
@@ -960,7 +962,8 @@ compiler_clean: compiler_moc_predefs_clean
 		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qurlquery.h \
 		/Users/grahamstrickland/opt/anaconda3/include/qt/QtGui/qvector2d.h \
 		/Users/grahamstrickland/opt/anaconda3/include/qt/QtGui/qtouchdevice.h \
-		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/QStringList
+		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/QStringList \
+		refitem.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o .obj/libraryui.o libraryui.cpp
 
 ####### Install

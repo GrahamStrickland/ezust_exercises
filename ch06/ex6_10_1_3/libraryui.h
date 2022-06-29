@@ -5,15 +5,15 @@
 
 using namespace std;
 
-clas LibraryUI
+class LibraryUI
 {
 public:
     LibraryUI(Library* lib);
     void add(QStringList objdata);
     void read();
     void enterData();
-    QString find(QString title) const;
-    void remove(QString title);
+    QString find() const;
+    void remove();
     void save();
     void list();
     QStringList promptRefItem();
