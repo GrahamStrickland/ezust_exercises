@@ -9,7 +9,7 @@ class Library : public QList<RefItem*> {
 public:
     Library() {}
     ~Library();
-    void addRefItem(RRefItem*& refItem);
+    void addRefItem(RefItem*& refItem);
     int removeRefItem(QString isbn);
     bool isInList(QString isbn);
     QString toString(QString sep) const;
@@ -22,7 +22,7 @@ private:
 
 class RefItem {
 public:
-    virtual ~refItem();
+    virtual ~RefItem();
     QString getItemType() const;
     QString getISBN() const;
     QString getTitle() const;
