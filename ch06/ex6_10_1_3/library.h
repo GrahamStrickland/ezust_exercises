@@ -15,9 +15,9 @@ public:
     bool isInList(QString isbn);
     QString toString(QString sep) const;
     QString getItemString(QString isbn);
+    RefItem* findRefItem(QString isbn);
 private:
     Library(const Library&);
     Library& operator=(const Library&);
-    RefItem* findRefItem(QString isbn);
 };
 #endif //LIBRARY_H

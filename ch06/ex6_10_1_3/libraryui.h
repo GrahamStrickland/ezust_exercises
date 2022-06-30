@@ -8,6 +8,8 @@ using namespace std;
 class LibraryUI
 {
 public:
+    enum Choices {READ=1, ADD, FIND, REMOVE, SAVE, LIST, QUIT};
+    enum Types {BOOK, REFERENCEBOOK, TEXTBOOK, DVD, FILM, DATADVD};
     LibraryUI(Library* lib);
     void add(QStringList objdata);
     void read();

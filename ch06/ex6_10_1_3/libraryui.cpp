@@ -8,12 +8,10 @@
 
 QTextStream cout(stdout);
 QTextStream cin(stdin);
-enum Choices {READ=1, ADD, FIND, REMOVE, SAVE, LIST, QUIT};
-enum Types {BOOK, REFERENCEBOOK, TEXTBOOK, DVD, FILM, DATADVD};
 const QStringList TYPES = {QStringList() << "BOOK" << "REFERENCEBOOK"
     << "TEXTBOOK" << "DVD" << "FILM" << "DATADVD"};
 
-LibraryUI::LibaryUI(Library* lib) : m_Lib(lib)
+LibraryUI::LibraryUI(Library* lib) : m_Lib(lib)
 {}
 
 void LibraryUI::add(QStringList objdata) {
@@ -23,11 +21,27 @@ void LibraryUI::add(QStringList objdata) {
     switch (static_cast<Types>(TYPES.indexOf(type))) {
     case BOOK:
         ref = new Book(objdata);
-        m_Lib.addRefItem(ref);
+        m_Lib->addRefItem(ref);
         break;
     case REFERENCEBOOK:
         ref = new ReferenceBook(objdata);
-        m_Lib.addRefItem(ref);
+        m_Lib->addRefItem(ref);
+        break;
+    case TEXTBOOK:
+        ref = new TextBook(objdata);
+        m_Lib->addRefItem(ref);
+        break;
+    case DVD:
+        ref = new Dvd(objdata);
+        m_Lib->addRefItem(ref);
+        break;
+    case FILM:
+        ref = new Film(objdata);
+        m_Lib->addRefItem(ref);
+        break;
+    case DATADVD:
+        ref = new DataBase(objdata);
+        m_Lib->addRefItem(ref);
         break;
     default: qDebug() << "Bad type in add() function";
     }
@@ -84,34 +98,50 @@ void LibraryUI::enterData() {
     default:
         qDebug() << "Bad type in enterData()";
     }
-    objdta.prepend(typestr);
+    objdata.prepend(typestr);
     add(objdata);
 }
 
-QString LibraryUI::find(QString title) const {
-    foreach (RefItem *current, m_Lib)
-        if (current->getTitle() == title)
-            return current->toString();
-    return QString("Error: Title not found");
+QString LibraryUI::find() const {
+    QString isbnstr;
+    while (1) {
+        cout << "Please enter ISBN of library item: " << flush;
+        isbnstr = cin.readLine();
+        if (not m_Lib->isInList(isbnstr)) {
+            cout << "Error: invalid ISBN number, please enter "
+                 << "another ISBN: ";
+            continue;
+        }
+        break;
+    }
+    return m_Lib->findRefItem(isbnstr)->toString();
 }
 
-void LibraryUI::remove(QString title) {
-    foreach (RefItem *current, m_Lib)
-        if (current->getTitle() == title)
-            m_Lib.removeAt(m_Lib.indexOf(current));
+void LibraryUI::remove() {
+    QString isbnstr;
+    while (1) {
+        cout << "Please enter ISBN of reference item: " << flush;
+        isbnstr = cin.readLine();
+        if (not m_Lib->isInList(isbnstr)) {
+            cout << "Error: invalid ISBN number, please enter "
+                 << "another ISBN: ";
+            continue;
+        }
+        break;
+    }
+    m_Lib->removeOne(m_Lib->findRefItem(isbnstr));
 }
 
 void LibraryUI::save() {
     QFile outf("libfile");
     outf.open(QIODevice::WriteOnly);
     QTextStream outstr(&outf);
-    outstr << m_Lib.toString();
+    outstr << m_Lib->toString(QString("\n"));
     outf.close();
 }
 
 void LibraryUI::list() {
-    foreach (RefItem *current, m_Lib)
-        cout << current->toString() << endl;
+    cout << m_Lib->toString(QString("\n"));
 }
 
 QStringList LibraryUI::promptRefItem() {
@@ -263,7 +293,8 @@ QStringList LibraryUI::promptDataBase() {
     }
     return retval;
 }
-Choices LibraryUI::nextTask() {
+
+LibraryUI::Choices LibraryUI::nextTask() {
     int choice;
     QString response;
     do {
@@ -292,7 +323,4 @@ void LibraryUI::prepareToQuit(bool saved) {
     if (ans == QString("Yes") || ans == QString("yes") || ans == QString("YES")
             || ans == QString("Y") || ans == QString("y"))
         save();
-
-    qDeleteAll(m_Lib);
-    clear();
 }

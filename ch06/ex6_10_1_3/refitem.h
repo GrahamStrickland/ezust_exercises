@@ -41,7 +41,7 @@ public:
                         Math, Music, Science};
     ReferenceBook(QString type, QString isbn, QString title, QString author,
             QString pub, int year, RefCategory refcat, int numCopies=1);
-    ReferenceBook(QString& proplist);
+    ReferenceBook(QStringList& proplist);
     QString toString(QString sep="[::]") const;
     RefCategory getCategory() const;
     QString categoryString() const; //returns string version of m_Category
@@ -56,7 +56,7 @@ public:
                             Philosophy, Psychology, Physics};
     TextBook(QString type, QString isbn, QString title, QString author,
             QString pub, int year, TextCategory textcat, int numCopies=1);
-    TextBook(QString& proplist);
+    TextBook(QStringList& proplist);
     QString toString(QString sep="[::]") const;
     TextCategory getCategory() const;
     QString categoryString() const; //returns string version of m_Category

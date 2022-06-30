@@ -52,10 +52,12 @@ OBJECTS_DIR   = .obj/
 
 SOURCES       = library.cpp \
 		libraryClient.cpp \
-		libraryui.cpp 
+		libraryui.cpp \
+		refitem.cpp 
 OBJECTS       = .obj/library.o \
 		.obj/libraryClient.o \
-		.obj/libraryui.o
+		.obj/libraryui.o \
+		.obj/refitem.o
 DIST          = /Users/grahamstrickland/opt/anaconda3/mkspecs/features/spec_pre.prf \
 		/Users/grahamstrickland/opt/anaconda3/mkspecs/qdevice.pri \
 		/Users/grahamstrickland/opt/anaconda3/mkspecs/features/device_config.prf \
@@ -242,9 +244,11 @@ DIST          = /Users/grahamstrickland/opt/anaconda3/mkspecs/features/spec_pre.
 		/Users/grahamstrickland/opt/anaconda3/mkspecs/features/yacc.prf \
 		/Users/grahamstrickland/opt/anaconda3/mkspecs/features/lex.prf \
 		ex6_10_1_3.pro library.h \
-		libraryui.h library.cpp \
+		libraryui.h \
+		refitem.h library.cpp \
 		libraryClient.cpp \
-		libraryui.cpp
+		libraryui.cpp \
+		refitem.cpp
 QMAKE_TARGET  = ex6_10_1_3
 DESTDIR       = 
 TARGET        = ex6_10_1_3
@@ -655,8 +659,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /Users/grahamstrickland/opt/anaconda3/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents library.h libraryui.h $(DISTDIR)/
-	$(COPY_FILE) --parents library.cpp libraryClient.cpp libraryui.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents library.h libraryui.h refitem.h $(DISTDIR)/
+	$(COPY_FILE) --parents library.cpp libraryClient.cpp libraryui.cpp refitem.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -706,10 +710,9 @@ compiler_clean: compiler_moc_predefs_clean
 
 ####### Compile
 
-.obj/library.o: library.cpp library.h \
-		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/QString \
-		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qstring.h \
-		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qchar.h \
+.obj/library.o: library.cpp /Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/QDebug \
+		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qdebug.h \
+		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qalgorithms.h \
 		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qglobal.h \
 		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qconfig-bootstrapped.h \
 		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qconfig.h \
@@ -731,55 +734,57 @@ compiler_clean: compiler_moc_predefs_clean
 		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qmutex.h \
 		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qnumeric.h \
 		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qversiontagging.h \
-		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qbytearray.h \
+		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qhash.h \
+		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qchar.h \
+		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qiterator.h \
+		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qlist.h \
 		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qrefcount.h \
-		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qnamespace.h \
 		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qarraydata.h \
+		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qhashfunctions.h \
+		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qpair.h \
+		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qbytearraylist.h \
+		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qbytearray.h \
+		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qnamespace.h \
+		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qstring.h \
 		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qstringbuilder.h \
+		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qstringlist.h \
+		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qregexp.h \
+		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qstringmatcher.h \
+		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qmap.h \
+		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qtextstream.h \
+		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qiodevice.h \
+		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qobject.h \
+		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qobjectdefs.h \
+		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qobjectdefs_impl.h \
+		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qcoreevent.h \
+		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qscopedpointer.h \
+		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qmetatype.h \
+		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qvarlengtharray.h \
+		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qcontainerfwd.h \
+		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qobject_impl.h \
+		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qlocale.h \
+		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qvariant.h \
+		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qshareddata.h \
+		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qvector.h \
+		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qpoint.h \
+		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qset.h \
+		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qcontiguouscache.h \
+		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qsharedpointer.h \
+		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qsharedpointer_impl.h \
+		library.h \
+		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/QString \
 		/Users/grahamstrickland/opt/anaconda3/include/qt/QtGui/QList \
 		/Users/grahamstrickland/opt/anaconda3/include/qt/QtGui/qevent.h \
 		/Users/grahamstrickland/opt/anaconda3/include/qt/QtGui/qtguiglobal.h \
 		/Users/grahamstrickland/opt/anaconda3/include/qt/QtGui/qtgui-config.h \
 		/Users/grahamstrickland/opt/anaconda3/include/qt/QtGui/qwindowdefs.h \
-		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qobjectdefs.h \
-		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qobjectdefs_impl.h \
 		/Users/grahamstrickland/opt/anaconda3/include/qt/QtGui/qwindowdefs_win.h \
 		/Users/grahamstrickland/opt/anaconda3/include/qt/QtGui/qregion.h \
 		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qrect.h \
 		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qmargins.h \
 		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qsize.h \
-		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qpoint.h \
 		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qdatastream.h \
-		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qscopedpointer.h \
-		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qiodevice.h \
-		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qobject.h \
-		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qlist.h \
-		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qalgorithms.h \
-		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qiterator.h \
-		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qhashfunctions.h \
-		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qpair.h \
-		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qbytearraylist.h \
-		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qstringlist.h \
-		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qregexp.h \
-		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qstringmatcher.h \
-		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qcoreevent.h \
-		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qmetatype.h \
-		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qvarlengtharray.h \
-		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qcontainerfwd.h \
-		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qobject_impl.h \
 		/Users/grahamstrickland/opt/anaconda3/include/qt/QtGui/qkeysequence.h \
-		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qvariant.h \
-		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qmap.h \
-		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qdebug.h \
-		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qhash.h \
-		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qtextstream.h \
-		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qlocale.h \
-		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qshareddata.h \
-		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qvector.h \
-		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qset.h \
-		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qcontiguouscache.h \
-		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qsharedpointer.h \
-		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qsharedpointer_impl.h \
 		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qurl.h \
 		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qurlquery.h \
 		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qfile.h \
@@ -965,6 +970,48 @@ compiler_clean: compiler_moc_predefs_clean
 		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/QStringList \
 		refitem.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o .obj/libraryui.o libraryui.cpp
+
+.obj/refitem.o: refitem.cpp refitem.h \
+		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/QString \
+		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qstring.h \
+		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qchar.h \
+		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qglobal.h \
+		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qconfig-bootstrapped.h \
+		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qconfig.h \
+		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qtcore-config.h \
+		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qsystemdetection.h \
+		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qprocessordetection.h \
+		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qcompilerdetection.h \
+		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qtypeinfo.h \
+		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qsysinfo.h \
+		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qlogging.h \
+		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qflags.h \
+		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qatomic.h \
+		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qbasicatomic.h \
+		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qatomic_bootstrap.h \
+		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qgenericatomic.h \
+		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qatomic_cxx11.h \
+		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qatomic_msvc.h \
+		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qglobalstatic.h \
+		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qmutex.h \
+		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qnumeric.h \
+		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qversiontagging.h \
+		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qbytearray.h \
+		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qrefcount.h \
+		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qnamespace.h \
+		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qarraydata.h \
+		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qstringbuilder.h \
+		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/QStringList \
+		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qstringlist.h \
+		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qlist.h \
+		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qalgorithms.h \
+		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qiterator.h \
+		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qhashfunctions.h \
+		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qpair.h \
+		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qbytearraylist.h \
+		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qregexp.h \
+		/Users/grahamstrickland/opt/anaconda3/include/qt/QtCore/qstringmatcher.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o .obj/refitem.o refitem.cpp
 
 ####### Install
 
