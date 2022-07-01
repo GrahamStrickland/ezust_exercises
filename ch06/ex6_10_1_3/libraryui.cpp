@@ -84,7 +84,7 @@ void LibraryUI::enterData() {
         typestr = cin.readLine();
         if (not TYPES.contains(typestr)) {
             cout << "Please enter one of the following types:\n"
-                 << TYPES.join(" ,") << endl;
+                 << TYPES.join(", ") << endl;
             continue;
         }
         break;
@@ -95,6 +95,14 @@ void LibraryUI::enterData() {
         break;
     case REFERENCEBOOK: objdata = promptReferenceBook();
         break;
+    case TEXTBOOK: objdata = promptTextBook();
+       break;
+    case DVD: objdata = promptDvd();
+       break;
+    case FILM: objdata = promptFilm();
+       break;
+    case DATADVD: objdata = promptDataBase();
+       break;
     default:
         qDebug() << "Bad type in enterData()";
     }

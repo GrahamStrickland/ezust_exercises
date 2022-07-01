@@ -1,5 +1,8 @@
 #include "refitem.h"
 
+RefItem::~RefItem()
+{}
+
 QString RefItem::getItemType() const {
     return m_ItemType;
 }
@@ -31,7 +34,7 @@ RefItem::RefItem(QString type, QString isbn, QString title, int numCopies)
 {}
 
 RefItem::RefItem(QStringList& plst) : m_ItemType(plst.takeFirst()),
-    m_ISBN(plst.takeFirst()), m_Title(plst.takeFirst),
+    m_ISBN(plst.takeFirst()), m_Title(plst.takeFirst()),
     m_NumberOfCopies(plst.takeFirst().toInt())
 {}
 
@@ -77,14 +80,14 @@ QString ReferenceBook::toString(QString sep) const {
                             .arg(categoryString());
 }
 
-RefCategory ReferenceBook::getCategory() const {
+ReferenceBook::RefCategory ReferenceBook::getCategory() const {
     return m_Category;
 }
 
 QString ReferenceBook::categoryString() const {
     switch(m_Category) {
     case Art: return "Art";
-    case Architectur: return "Architecture";
+    case Architecture: return "Architecture";
     case ComputerScience: return "ComputerScience";
     case Literature: return "Literature";
     case Math: return "Math";
@@ -118,7 +121,7 @@ QString TextBook::toString(QString sep) const {
                             .arg(categoryString());
 }
 
-TextCategory TextBook::getCategory() const {
+TextBook::TextCategory TextBook::getCategory() const {
     return m_Category;
 }
 
@@ -171,13 +174,13 @@ QString Dvd::getPublisher() const {
     return m_Publisher;
 }
 
-Film::Film(Qstring type, QString isbn, QString title, QString creator, QString pub,
-        int year, int numCopies, FilmCategory filmcat) : 
+Film::Film(QString type, QString isbn, QString title, QString creator, QString pub,
+        int year, FilmCategory filmcat, int numCopies) : 
     Dvd(type, isbn, title, creator, pub, year, numCopies), m_Category(filmcat)
 {}
 
 Film::Film(QStringList& proplist) : Dvd(proplist),
-    m_Category(static_cast<FilmCategory>(plst.takeFirst().toInt()))
+    m_Category(static_cast<FilmCategory>(proplist.takeFirst().toInt()))
 {}
 
 QString Film::toString(QString sep) const {
@@ -185,7 +188,7 @@ QString Film::toString(QString sep) const {
                             .arg(categoryString());
 }
 
-FilmCategory Film::getCategory() const {
+Film::FilmCategory Film::getCategory() const {
     return m_Category;
 }
 
@@ -207,21 +210,21 @@ QStringList Film::getFilmCategories() {
     return list;
 }
 
-DataBase(QString type, QString isbnm QString title, QString creator, QString pub,
-        int year, int numCopies, DBCategory dbcat) :
+DataBase::DataBase(QString type, QString isbn, QString title, QString creator, QString pub,
+        int year, DBCategory dbcat, int numCopies) :
     Dvd(type, isbn, title, creator, pub, year, numCopies), m_Category(dbcat)
 {}
 
-DataBase(QStringList& proplist) : Dvd(proplist),
-    m_Category(static_cast<DBCategory>(plst.takeFirst().toInt()))
+DataBase::DataBase(QStringList& proplist) : Dvd(proplist),
+    m_Category(static_cast<DBCategory>(proplist.takeFirst().toInt()))
 {}
 
-QString DataBase::toString(QString sep) {
+QString DataBase::toString(QString sep) const {
     return QString("%1%2%3").arg(Dvd::toString(sep)).arg(sep)
                             .arg(categoryString());
 }
 
-DBCategory DataBase::getCategory() const {
+DataBase::DBCategory DataBase::getCategory() const {
     return m_Category;
 }
 
