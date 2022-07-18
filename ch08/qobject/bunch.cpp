@@ -4,6 +4,16 @@
 
 static QTextStream cout(stdout);
 
+void showTree(QObject* theparent) {
+    foreach (QObject* thechild, theparent->findChildren<Person*>()) {
+        cout << "Member: " << thechild->objectName() << " - Parent: ";
+        if (thechild->parent()->objectName() == theparent->objectName())
+            cout << "A Stack Object\n";
+        else
+            cout << thechild->parent()->objectName() << '\n';
+    }
+}
+
 void growBunch() {
     qDebug() << "First we create a bunch of objects." << endl;
     QObject bunch;
@@ -22,21 +32,9 @@ void growBunch() {
     new Person("Alice");                    /* Alice has no parent - memory leak? */
     qDebug() << "\nDisplay the list using QObject::dumpObjectTree()"
              << endl;
-    bunch.dumpObjectTree();                 /* dumpObjectTree() output will appear on the
-			       screen only if the Qt library has been
-			       compiled with the debugging option turned on.*/
+    showTree(&bunch);
     cout << "\nReady to return from growBunch() -"
          << " Destroy all local stack objects." << endl;
-}
-
-void showTree(QObject* theparent) {
-    foreach (QObject* thechild, theparent.findChildren<Person*>) {
-        qDebug() << "Member: " << thechild->objectName() << " - Parent: ";
-        if (thechild->parent()->objectName() == theparent->objectName())
-            qDebug() << "A Stacj Object\n";
-        else
-            qDebug() << thechild->parent()->objectName() << '\n';
-    }
 }
 
 int main(int , char**) {
