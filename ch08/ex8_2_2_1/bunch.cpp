@@ -5,12 +5,20 @@
 static QTextStream cout(stdout);
 
 void showTree(QObject* theparent) {
+    cout << "QObject::A Stack Object\n";
+    int tabs = 1;
     foreach (QObject* thechild, theparent->findChildren<Person*>()) {
-        cout << "Member: " << thechild->objectName() << " - Parent: ";
-        if (thechild->parent()->objectName() == theparent->objectName())
-            cout << "A Stack Object\n";
-        else
-            cout << thechild->parent()->objectName() << '\n';
+        if (thechild->parent()->objectName() == theparent->objectName()) {
+            tabs = 1;
+            for (int i = 0; i < tabs; i++)
+                cout << '\t';
+            cout << "QObject::" << thechild->objectName() << '\n';
+            tabs++;
+        } else {
+            for (int i = 0; i < tabs; i++)
+                cout << '\t';
+            cout << "QObject::" << thechild->objectName() << '\n';
+        }
     }
 }
 
@@ -30,7 +38,7 @@ void growBunch() {
     new Person("Jan", carol);
     new Person("Cindy", carol);
     new Person("Alice");                    /* Alice has no parent - memory leak? */
-    qDebug() << "\nDisplay the list using QObject::dumpObjectTree()"
+    qDebug() << "\nDisplay the list using showtree(&bunch)"
              << endl;
     showTree(&bunch);
     cout << "\nReady to return from growBunch() -"
