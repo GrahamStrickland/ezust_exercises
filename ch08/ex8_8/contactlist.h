@@ -28,11 +28,11 @@ public:
         // Postcondition: m_length set to length and m_ContactList initialized
         //  and memory reserved of size m_length.
 
-    void add(const Contact& c);
+    void add(Contact* const c);
         // Function to add a contact to the contact list.
         // Postcondition: m_length++ and contact added to m_ContactList.
 
-    void remove(const Contact& c);
+    void remove(Contact* const c);
         // Function to remove a contact from the contact list.
         // Postcondition: Contact c removed from m_ContactList and m_ContactList
         //  decremented by number of occurrences of c.
@@ -48,11 +48,12 @@ public:
         //  category.
         // Postcondition: Returned QStringList object with all names and addresses
         //  matching cat separated by '\t'.
+
     virtual ~ContactList();
         // Destructor function.
 
 private:
     unsigned int m_Length;
-    QList<Contact> m_ContactList;
+    QList<Contact*> m_ContactList;
 };
 #endif // CONTACT_LIST_H

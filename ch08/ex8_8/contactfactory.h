@@ -13,13 +13,13 @@ public:
     ContactFactory();
         // Default ContactFactory constructor.
 
-    void operator>>(ContactList &list);
+    void operator>>(ContactList* list);
         // Function to input a random Contact object into
         //  the given list.
         // Postcondition: randomly generated Contact object
         //  inserted into list.
 
-    void createRandomContacts(ContactList& cl, int n=10);
+    void createRandomContacts(ContactList* cl, int n=10);
         // Function to generate n random Contact objects and
         //  place them in cl.
         // Postcondition: cl filled with random Contact objects.

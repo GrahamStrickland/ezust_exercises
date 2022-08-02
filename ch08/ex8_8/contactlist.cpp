@@ -21,13 +21,13 @@ ContactList::ContactList(unsigned int length, QObject* parent)
     m_ContactList.reserve(m_Length);
 }
 
-void ContactList::add(const Contact& c)
+void ContactList::add(Contact* const c)
 {
     m_Length++;
     m_ContactList.append(c);
 }
 
-void ContactList::remove(const Contact& c)
+void ContactList::remove(Contact* const c)
 {
     unsigned int num = m_ContactList.removeAll(c);
     m_Length -= num;
@@ -37,11 +37,11 @@ QStringList ContactList::getPhoneList(int cat) const
 {
     QStringList phoneList;
 
-    foreach (const Contact &contact, m_ContactList) {
-        if (contact.getCategory() == cat)
+    foreach (const Contact* contact, m_ContactList) {
+        if (contact->getCategory() == cat)
             phoneList << QString("%1\t%2")
-                .arg(contact.getName())
-                .arg(contact.getNumber());
+                .arg(contact->getName())
+                .arg(contact->getNumber());
     }
 
     return phoneList;
@@ -51,11 +51,11 @@ QStringList ContactList::getMailingList(int cat) const
 {
     QStringList mailingList;
 
-    foreach (const Contact &contact, m_ContactList) {
-        if (contact.getCategory() == cat)
+    foreach (const Contact* contact, m_ContactList) {
+        if (contact->getCategory() == cat)
             mailingList << QString("%1\t%2")
-                .arg(contact.getName())
-                .arg(contact.getAddress());
+                .arg(contact->getName())
+                .arg(contact->getAddress());
     }
 
     return mailingList;
@@ -63,5 +63,6 @@ QStringList ContactList::getMailingList(int cat) const
 
 ContactList::~ContactList()
 {
+    qDeleteAll(m_ContactList);
     m_ContactList.clear();
 }

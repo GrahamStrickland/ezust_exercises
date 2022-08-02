@@ -10,7 +10,7 @@ ContactFactory::ContactFactory()
     srand(time(0));
 }
 
-void ContactFactory::operator>>(ContactList &list)
+void ContactFactory::operator>>(ContactList* list)
 {
     QString first, last, add, zip, cty, num;
 
@@ -42,13 +42,13 @@ void ContactFactory::operator>>(ContactList &list)
         .arg(getRandomNumber(0,10));
 
     // Create Contact with random details
-    Contact random(1, first, last, add, zip, cty, num);
+    Contact* random = new Contact(1, first, last, add, zip, cty, num);
 
     // Add to list
-    list.add(random);
+    list->add(random);
 }
 
-void ContactFactory::createRandomContacts(ContactList& cl, int n)
+void ContactFactory::createRandomContacts(ContactList* cl, int n)
 {
     static ContactFactory cf;
     for (int i=0; i<n; ++i) {

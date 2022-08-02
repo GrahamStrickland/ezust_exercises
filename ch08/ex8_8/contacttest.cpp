@@ -8,12 +8,12 @@ int main()
     QTextStream cout(stdout);
     QStringList phoneList, mailingList;
 
-    ContactList list1;
+    ContactList *list1 = 0;
     ContactFactory cf1;
     cf1.createRandomContacts(list1, 3);
 
-    phoneList = list1.getPhoneList(1);
-    mailingList = list1.getMailingList(1);
+    phoneList = list1->getPhoneList(1);
+    mailingList = list1->getMailingList(1);
 
     cout << "list1.getPhoneList(1): ";
     foreach (const QString &str, phoneList) cout << str << endl;
